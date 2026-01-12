@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using FluentPipelines.Pipelines;
 
 namespace FluentPipelines
 {
@@ -12,7 +11,7 @@ namespace FluentPipelines
     public class PipelineBuilder<TInput, TOutput> : IPipelineBuilder<TInput, TOutput>
     {
         /// <summary>
-        /// The collection of steps added to the builder, which will be used to construct the pipeline.
+        /// Gets the collection of steps added to the builder, which will be used to construct the pipeline.
         /// <para><b>IMPORTANT:</b> The first step must take <typeparamref name="TInput"/> as input, otherwise the built-in pipeline types will not work.</para>
         /// </summary>
         protected internal List<PipelineStep> Steps { get; }
@@ -36,6 +35,9 @@ namespace FluentPipelines
         /// <param name="firstStep">The first step of the pipeline, processing the input data.</param>
         public PipelineBuilder(IPipelineStep<TInput, TOutput> firstStep)
         {
+            if(firstStep is null)
+                throw new ArgumentNullException(nameof(firstStep));
+
             Steps = new List<PipelineStep>() {
                 new PipelineStep<TInput, TOutput>(firstStep)
             };
@@ -44,7 +46,7 @@ namespace FluentPipelines
         /// <inheritdoc/>
         public virtual IPipeline<TInput, TOutput> Build()
         {
-            return new InputOutputPipeline<TInput, TOutput>(Steps);
+            return new InOutPipeline<TInput, TOutput>(Steps);
         }
 
         /// <inheritdoc/>

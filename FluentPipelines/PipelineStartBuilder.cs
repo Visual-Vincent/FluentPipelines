@@ -3,6 +3,37 @@
 namespace FluentPipelines
 {
     /// <summary>
+    /// A builder that constructs the beginning of pipelines.
+    /// </summary>
+    public class PipelineStartBuilder : IPipelineStartBuilder
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PipelineStartBuilder"/> class.
+        /// </summary>
+        public PipelineStartBuilder()
+        {
+        }
+
+        /// <inheritdoc/>
+        public virtual IOutPipelineBuilder<TNext> Start<TNext>(OutPipelineStepDelegate<TNext> action)
+        {
+            if(action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            return Start(new OutFunctionStep<TNext>(action));
+        }
+
+        /// <inheritdoc/>
+        public virtual IOutPipelineBuilder<TNext> Start<TNext>(IOutPipelineStep<TNext> step)
+        {
+            if(step is null)
+                throw new ArgumentNullException(nameof(step));
+
+            return new OutPipelineBuilder<TNext>(step);
+        }
+    }
+
+    /// <summary>
     /// A builder that constructs the beginning of pipelines taking input data.
     /// </summary>
     /// <typeparam name="TInput">The type of data used as input to the pipeline.</typeparam>
