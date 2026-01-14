@@ -36,5 +36,19 @@ namespace FluentPipelines
         /// <param name="step">The next step of the pipeline, processing the data from the previous step.</param>
         /// <returns>A builder that allows you to continue building the rest of the pipeline.</returns>
         IPipelineBuilder<TInput, TNext> Then<TNext>(IPipelineStep<TOutput, TNext> step);
+
+        /// <summary>
+        /// Defines the final step of the pipeline, returning no output data.
+        /// </summary>
+        /// <param name="action">A function acting as the next step of the pipeline, processing the data from the previous step and completing the pipeline.</param>
+        /// <returns>A builder that allows you to build the pipeline.</returns>
+        IInPipelineBuilder<TInput> Then(InPipelineStepDelegate<TOutput> action);
+
+        /// <summary>
+        /// Defines the final step of the pipeline, returning no output data.
+        /// </summary>
+        /// <param name="step">The next step of the pipeline, processing the data from the previous step and completing the pipeline.</param>
+        /// <returns>A builder that allows you to build the pipeline.</returns>
+        IInPipelineBuilder<TInput> Then(IInPipelineStep<TOutput> step);
     }
 }

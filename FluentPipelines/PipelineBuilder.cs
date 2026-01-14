@@ -68,5 +68,30 @@ namespace FluentPipelines
 
             return new PipelineBuilder<TInput, TNext>(Steps);
         }
+
+        /// <inheritdoc/>
+        public IInPipelineBuilder<TInput> Then(InPipelineStepDelegate<TOutput> action)
+        {
+            if(action is null)
+                throw new ArgumentNullException(nameof(action));
+
+            return Then(new InFunctionStep<TOutput>(action));
+        }
+
+        /// <inheritdoc/>
+        public IInPipelineBuilder<TInput> Then(IInPipelineStep<TOutput> step)
+        {
+            if(step is null)
+                throw new ArgumentNullException(nameof(step));
+
+            Steps.Add(new PipelineStep<TOutput, object>(
+                new FunctionStep<TOutput, object>(input => {
+                    step.Run(input);
+                    return null;
+                })
+            ));
+
+            return new InPipelineBuilder<TInput>(Steps);
+        }
     }
 }
