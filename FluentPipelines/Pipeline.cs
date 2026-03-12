@@ -1,29 +1,30 @@
-using System;
+﻿using System;
 
 namespace FluentPipelines
 {
     /// <summary>
-    /// A static class containing helper methods for building pipelines.
+    /// A pipeline with no input nor no output. Also contains static helper methods for creating pipelines.
     /// </summary>
-    public static class Pipeline
+    public partial class Pipeline : IPipeline
     {
         /// <summary>
-        /// Creates a new pipeline with no input.
+        /// Gets the chain of delegates making up the steps of the pipeline.
         /// </summary>
-        /// <returns>A builder used to construct the pipeline.</returns>
-        public static IPipelineStartBuilder Create()
-        {
-            return new PipelineStartBuilder();
-        }
+        protected Action Chain { get; }
 
         /// <summary>
-        /// Creates a new pipeline.
+        /// Initializes a new instance of the <see cref="Pipeline"/> class.
         /// </summary>
-        /// <typeparam name="TInput">The type of data used as input to the pipeline.</typeparam>
-        /// <returns>A builder used to construct the pipeline.</returns>
-        public static IPipelineStartBuilder<TInput> Create<TInput>()
+        /// <param name="chain">The chain of delegates making up the steps of the pipeline.</param>
+        public Pipeline(Action chain)
         {
-            return new PipelineStartBuilder<TInput>();
+            Chain = chain ?? throw new ArgumentNullException(nameof(chain));
+        }
+
+        /// <inheritdoc/>
+        public virtual void Run()
+        {
+            Chain();
         }
     }
 }

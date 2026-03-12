@@ -3,65 +3,14 @@
 namespace FluentPipelines
 {
     /// <summary>
-    /// A builder that constructs the beginning of pipelines.
+    /// A builder that constructs the beginning of pipelines with no input data.
     /// </summary>
     public class PipelineStartBuilder : IPipelineStartBuilder
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PipelineStartBuilder"/> class.
-        /// </summary>
-        public PipelineStartBuilder()
-        {
-        }
-
         /// <inheritdoc/>
-        public virtual IOutPipelineBuilder<TNext> Start<TNext>(OutPipelineStepDelegate<TNext> action)
+        public virtual IPipelineBuilder<TNext> Then<TNext>(Func<TNext> step)
         {
-            if(action is null)
-                throw new ArgumentNullException(nameof(action));
-
-            return Start(new OutFunctionStep<TNext>(action));
-        }
-
-        /// <inheritdoc/>
-        public virtual IOutPipelineBuilder<TNext> Start<TNext>(IOutPipelineStep<TNext> step)
-        {
-            if(step is null)
-                throw new ArgumentNullException(nameof(step));
-
-            return new OutPipelineBuilder<TNext>(step);
-        }
-    }
-
-    /// <summary>
-    /// A builder that constructs the beginning of pipelines taking input data.
-    /// </summary>
-    /// <typeparam name="TInput">The type of data used as input to the pipeline.</typeparam>
-    public class PipelineStartBuilder<TInput> : IPipelineStartBuilder<TInput>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PipelineStartBuilder{TInput}"/> class.
-        /// </summary>
-        public PipelineStartBuilder()
-        {
-        }
-
-        /// <inheritdoc/>
-        public virtual IPipelineBuilder<TInput, TNext> Start<TNext>(PipelineStepDelegate<TInput, TNext> action)
-        {
-            if(action is null)
-                throw new ArgumentNullException(nameof(action));
-
-            return Start(new FunctionStep<TInput, TNext>(action));
-        }
-
-        /// <inheritdoc/>
-        public virtual IPipelineBuilder<TInput, TNext> Start<TNext>(IPipelineStep<TInput, TNext> step)
-        {
-            if(step is null)
-                throw new ArgumentNullException(nameof(step));
-
-            return new PipelineBuilder<TInput, TNext>(step);
+            return new PipelineBuilder<TNext>(step);
         }
     }
 }
