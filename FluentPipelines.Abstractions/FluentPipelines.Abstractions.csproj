@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>FluentPipelines.Abstractions</AssemblyName>
     <RootNamespace>FluentPipelines</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
