@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
-    <AssemblyName>FluentPipelines</AssemblyName>
+    <AssemblyName>FluentPipelines.Abstractions</AssemblyName>
     <RootNamespace>FluentPipelines</RootNamespace>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -14,7 +14,7 @@
     <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
     <Copyright>Copyright © Visual Vincent 2024-2026</Copyright>
     <Company>Visual Vincent (Open Source Developer)</Company>
-    <Description>FluentPipelines provides streamlined methods to build top-to-bottom data processing pipelines using fluent syntax.</Description>
+    <Description>Abstractions for FluentPipelines.</Description>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Visual-Vincent/FluentPipelines</RepositoryUrl>
     <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
