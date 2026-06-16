@@ -41,4 +41,8 @@
     <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentPipelines.Abstractions" Version="1.0.1" />
+  </ItemGroup>
+
 </Project>
