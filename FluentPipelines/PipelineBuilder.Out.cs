@@ -25,7 +25,7 @@ namespace FluentPipelines
         /// <inheritdoc/>
         public virtual IPipeline<TOut> Build()
         {
-            return new Pipeline<TOut>(() => Chain());
+            return new Pipeline<TOut>(Chain);
         }
 
         /// <inheritdoc/>
